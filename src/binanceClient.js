@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { createHttpsRequest, get } = require('./httpUtil');
+const { createHttpsRequest } = require('./httpUtil');
 const { generateQueryString } = require('./utils');
 
 class BinanceClient {
