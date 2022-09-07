@@ -32,7 +32,7 @@ Task:
 
 2. Create `.env` file - see `.env.example` for reference.
 
-3. To run the scrip
+3. To run the script
 
    `npm start`
 

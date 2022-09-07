@@ -101,9 +101,20 @@ class BinanceClient {
     return this.createSignedRequest(params, '/api/v3/openOrders', { method: 'GET' });
   }
 
+  /**
+   * Creates a signed request and submits it to the Binance API
+   *
+   * @param {object} params Request parameters - key value pair
+   * @param {string} path  The API endpoint path, for ex: `/api/v3/openOrders`
+   * @param {object} headers Request headers - key value pair
+   */
   async createSignedRequest(params, path, headers) {
     const timestamp = await this.getServerTime();
+
+    // Generate query string from given params and appending timestamp to it
     const queryString = generateQueryString({ ...params, timestamp });
+
+    // Generate payload signature
     const signature = crypto.createHmac('sha256', this.apiSecret).update(queryString).digest('hex');
 
     return createHttpsRequest(`${this.baseUrl}${path}?${queryString}&signature=${signature}`, {
